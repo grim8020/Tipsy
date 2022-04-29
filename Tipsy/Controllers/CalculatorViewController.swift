@@ -17,7 +17,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var splitNumberLabel: UILabel!
     
     var tip = 0.10
-    var numberOfPeople = 1
+    var numberOfPeople = 2
     var billTotal = 0.0
     var finalResult = "0.0"
     
@@ -32,12 +32,10 @@ class CalculatorViewController: UIViewController {
         sender.isSelected = true
         
         let buttonTitle = sender.currentTitle!
-        
         let buttonTitleMinusPercentSign = String(buttonTitle.dropLast())
-        
         let buttonTitleAsAnswer = Double(buttonTitleMinusPercentSign)!
-        
         tip = buttonTitleAsAnswer/100
+        
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -54,21 +52,6 @@ class CalculatorViewController: UIViewController {
             finalResult = String(format: "%.2f", result)
         }
         
-        
-        
-        print(tip)
-        
-        let textfieldInt: Float? = Float(billTextField.text ?? "Error")
-        
-        let billPercent =  (textfieldInt ?? 0) * Float(tip)
-        let numberOfPeople: Int? = Int(splitNumberLabel.text!)
-        
-        let billTotal = ((textfieldInt ?? 0) + billPercent) / Float(numberOfPeople ?? 0)
-        let finalResult = (String(format: "$%.2f", billTotal))
-        print(finalResult)
-        
-    
-        
         self.performSegue(withIdentifier: "goToResults", sender: self)
     }
     
@@ -79,8 +62,7 @@ class CalculatorViewController: UIViewController {
             destinationVC.result = finalResult
             destinationVC.tip = Int(tip * 100)
             destinationVC.split = numberOfPeople
-            
-            
+
         }
     }
     
